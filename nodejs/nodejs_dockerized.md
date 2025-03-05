@@ -150,7 +150,7 @@ Setelah image dibuat, jalankan container menggunakan perintah berikut:
 > Pastikan masuk kedalam *root* direktori proyek **node_web_app** (bukan di sub-folder)  
 
 ```sh
-docker run -it --rm --name c_node_app -p 3000:8080 -v "$(pwd)/src:/var/www" -v /var/www/node_modules i_node:22.14-alpine3.20
+docker run -it --rm --name c_node_app -p 8080:3000 -v "$(pwd)/src:/var/www" -v /var/www/node_modules i_node:22.14-alpine3.20
 ```
 Sekarang **Node.js 22.14** berjalan di atas **Alpine 3.20**, dengan direktori kerja didalam **container** (`/var/www`).  
 
