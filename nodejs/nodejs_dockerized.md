@@ -14,16 +14,18 @@ kita perlu menyiapkan struktur folder proyek agar semua file dan konfigurasi ter
 Misalkan kita memiliki proyek bernama **`node_web_app`**, maka struktur direktori yang perlu dibuat adalah sebagai berikut:
 
 ```plaintext
-node_web_app/               # Root folder proyek
-│── src/                    # Folder untuk source code aplikasi
-│   ├── index.js            # File utama Node.js
-│   ├── package.json        # File konfigurasi Node.js (dependencies)
-│   ├── package-lock.json   # Lockfile untuk dependencies
-│   ├── .env                # File konfigurasi environment
-│── node.Dockerfile         # Dockerfile untuk membangun image
+node_web_app/               # (Wajib) Root folder proyek
+│── src/                    # (Wajib) Folder untuk source code aplikasi
+│   ├── index.js            # (Wajib) File utama Node.js
+│   ├── package.json        # (Dibuat otomatis oleh node) File konfigurasi Node.js (dependencies)
+│   ├── package-lock.json   # (Dibuat otomatis oleh node) Lockfile untuk dependencies
+│   ├── .env                # (Sementara tidak diperlukan) File konfigurasi environment
+│── node.Dockerfile         # (Wajib) Dockerfile untuk membangun image
 │── docker-compose.yml      # (Opsional) File Docker Compose untuk manajemen container
-│── README.md               # Dokumentasi proyek
+│── README.md               # (Opsional) Dokumentasi proyek
 ```
+
+Namun untuk percobaan sekarang ini, cukup membuat folder **node_web_app** sebagai ***root*** folder proyek, kemudian sub-folder **src** sebagai *source code* aplikasi yang dibangun, dan file **node.Dockerfile** (tepat didalam folder "node_web_app") yang diperlukan untuk membangun image node.
 
 ---
 
