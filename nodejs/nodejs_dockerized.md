@@ -201,6 +201,7 @@ CTRL + C
 
 Atau, jika container berjalan di background (mode detached `-d`), Anda bisa menghentikannya dengan:  
 ```sh
+docker ps
 docker stop c_node_app
 ```
 
