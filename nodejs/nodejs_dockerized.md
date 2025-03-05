@@ -147,6 +147,8 @@ Setelah semua file `node.Dockerfile` selesai dibentuk, jalankan perintah berikut
 ### :two: **Jalankan Container**  
 Setelah image dibuat, jalankan container menggunakan perintah berikut:
 
+> Pastikan masuk kedalam *root* direktori proyek **node_web_app** (bukan di sub-folder)  
+
 ```sh
 docker run -it --rm --name c_node_app -p 3000:8080 -v "$(pwd)/src:/var/www" -v /var/www/node_modules i_node:22.14-alpine3.20
 ```
