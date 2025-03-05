@@ -150,6 +150,7 @@ Setelah image dibuat, jalankan container menggunakan perintah berikut:
 ```sh
 docker run -it --rm --name c_node_app -p 3000:8080 -v "$(pwd)/src:/var/www" -v /var/www/node_modules i_node:22.14-alpine3.20
 ```
+Sekarang **Node.js 22.14** berjalan di atas **Alpine 3.20**, dengan direktori kerja didalam **container** (`/var/www`).  
 
 perintah ke :two: tersebut bertujuan untuk **menjalankan container** dari image `i_node:22.14-alpine3.20` yang telah dibuat sebelumnya. Berikut adalah penjelasan dari setiap bagiannya:
 
@@ -202,10 +203,6 @@ Atau, jika container berjalan di background (mode detached `-d`), Anda bisa meng
 ```sh
 docker stop c_node_app
 ```
-
----
-
-Sekarang **Node.js 22.14** berjalan di atas **Alpine 3.20**, dengan direktori kerja didalam **container** (`/var/www`).
 
 ---
 
