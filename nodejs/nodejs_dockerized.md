@@ -113,7 +113,7 @@ COPY . .
 EXPOSE 3000
 
 # Menjalankan perintah untuk memulai aplikasi
-CMD ["node", "server.js"]
+CMD ["node", "app.js"]
 ```
 
 ---
