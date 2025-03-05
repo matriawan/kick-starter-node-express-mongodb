@@ -1,4 +1,4 @@
-# **Mempercepat Pengembangan Web dengan Dockerized Node.js**  
+# :rocket: **Mempercepat Pengembangan Web dengan Dockerized Node.js**  
 
 Dalam dunia pengembangan web, efisiensi adalah kunci. Menyiapkan lingkungan pengembangan yang konsisten sering kali menjadi tantangan, terutama ketika bekerja dalam tim atau menjalankan aplikasi di berbagai sistem. Oleh karena itu, saya ingin berbagi **Dockerfile** yang dapat membantu mempercepat proses pengembangan aplikasi **Node.js** berbasis **Express.js** dan **MongoDB** dengan pendekatan **Dockerized**.  
 
@@ -155,33 +155,33 @@ adalah perintah untuk **menjalankan container** dari image `i_node:22.14-alpine3
 
 ### **Penjelasan Perintah**  
 
-1️⃣ **`docker run`**  
+:one: **`docker run`**  
    → Perintah ini digunakan untuk menjalankan sebuah container dari image yang telah dibuat sebelumnya.  
 
-2️⃣ **`-it`**  
+:two" **`-it`**  
    → **`-i` (interactive)**: Memungkinkan interaksi dengan terminal dalam container.  
    → **`-t` (tty)**: Memberikan terminal virtual untuk interaksi yang lebih nyaman.  
 
-3️⃣ **`--rm`**  
+:three: **`--rm`**  
    → Menghapus container secara otomatis setelah berhenti, sehingga container tidak menumpuk di sistem.  
 
-4️⃣ **`--name c_node_app`**  
+:four: **`--name c_node_app`**  
    → Memberikan nama `c_node_app` untuk container yang dijalankan agar lebih mudah dikenali dan dikelola.  
 
-5️⃣ **`-p 3000:8080`**  
+:five: **`-p 3000:8080`**  
    → Memetakan **port 3000 di host** ke **port 8080 di dalam container**.  
    → Artinya, aplikasi dalam container yang berjalan di port **8080** akan dapat diakses dari luar melalui port **3000**.  
 
-6️⃣ **`-v "$(pwd)/src:/var/www"`**  
+:six: **`-v "$(pwd)/src:/var/www"`**  
    → **Volume binding (mounting)**:  
    → Menghubungkan folder `src` di direktori kerja saat ini (`$(pwd)`) ke `/var/www` dalam container.  
    → Artinya, perubahan pada file dalam `src` akan langsung terlihat di container tanpa perlu membangun ulang image.  
 
-7️⃣ **`-v /var/www/node_modules`**  
+:seven: **`-v /var/www/node_modules`**  
    → Menggunakan **anonymous volume** untuk direktori `node_modules` dalam container.  
    → Ini mencegah `node_modules` dalam container ditimpa oleh direktori `node_modules` di host (karena host mungkin memiliki konfigurasi berbeda).  
 
-8️⃣ **`i_node:22.14-alpine3.20`**  
+:eight" **`i_node:22.14-alpine3.20`**  
    → Menentukan **image** yang akan digunakan untuk menjalankan container.  
 
 ---
