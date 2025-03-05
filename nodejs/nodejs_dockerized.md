@@ -151,7 +151,7 @@ Setelah image dibuat, jalankan container menggunakan perintah berikut:
 docker run -it --rm --name c_node_app -p 3000:8080 -v "$(pwd)/src:/var/www" -v /var/www/node_modules i_node:22.14-alpine3.20
 ```
 
-adalah perintah untuk **menjalankan container** dari image `i_node:22.14-alpine3.20` yang telah dibuat sebelumnya. Berikut adalah penjelasan dari setiap bagiannya:
+perintah ke :two: tersebut bertujuan untuk **menjalankan container** dari image `i_node:22.14-alpine3.20` yang telah dibuat sebelumnya. Berikut adalah penjelasan dari setiap bagiannya:
 
 #### **Penjelasan Perintah** :two:  
 
@@ -184,18 +184,13 @@ adalah perintah untuk **menjalankan container** dari image `i_node:22.14-alpine3
 8. **`i_node:22.14-alpine3.20`**  
    → Menentukan **image** yang akan digunakan untuk menjalankan container.  
 
----
-
-### **Kesimpulan**  
-Perintah ini menjalankan container **Node.js 22.14 dengan Alpine 3.20**, dengan konfigurasi sebagai berikut:  
+Perintah :two: tersebut menjalankan container **Node.js 22.14 dengan Alpine 3.20**, dengan konfigurasi sebagai berikut:  
 + **Interaktif** (bisa menggunakan terminal)  
 + **Container otomatis terhapus setelah dihentikan**  
 + **Menggunakan nama `c_node_app`**  
 + **Port 8080 dalam container dipetakan ke port 3000 di host**  
 + **Kode dalam `src` langsung terhubung ke dalam container di `/var/www`**  
 + **`node_modules` dalam container tetap terisolasi agar kompatibel dengan sistem dalam container**  
-
----
 
 ### **Cara Menghentikan Container**  
 Karena container ini berjalan secara interaktif, Anda dapat menghentikannya dengan menekan:  
