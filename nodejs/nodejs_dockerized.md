@@ -16,7 +16,7 @@ Misalkan kita memiliki proyek bernama **`node_web_app`**, maka struktur direktor
 ```plaintext
 node_web_app/               # (Wajib) Root folder proyek
 │── src/                    # (Wajib) Folder untuk source code aplikasi
-│   ├── index.js            # (Wajib) File utama Node.js
+│   ├── app.js              # (Wajib) File utama Node.js
 │   ├── package.json        # (Dibuat otomatis oleh node) File konfigurasi Node.js (dependencies)
 │   ├── package-lock.json   # (Dibuat otomatis oleh node) Lockfile untuk dependencies
 │   ├── .env                # (Sementara tidak diperlukan) File konfigurasi environment
@@ -55,8 +55,8 @@ npm install express mongoose
 ```
 Ini akan membuat **`node_modules/`** (yang nanti kita kelola dengan volume Docker).
 
-#### **:four: Buat file `index.js` dalam folder `src/`**  
-Buka file `src/index.js` dan tambahkan kode berikut sebagai contoh server sederhana:
+#### **:four: Buat file `app.js` dalam folder `src/`**  
+Buka file `src/app.js` dan tambahkan kode berikut sebagai contoh server sederhana:
 
 ```javascript
 const express = require('express');
