@@ -153,37 +153,35 @@ docker run -it --rm --name c_node_app -p 3000:8080 -v "$(pwd)/src:/var/www" -v /
 
 adalah perintah untuk **menjalankan container** dari image `i_node:22.14-alpine3.20` yang telah dibuat sebelumnya. Berikut adalah penjelasan dari setiap bagiannya:
 
----
+#### **Penjelasan Perintah** :two:  
 
-### **Penjelasan Perintah**  
-
-:one: **`docker run`**  
+1. **`docker run`**  
    → Perintah ini digunakan untuk menjalankan sebuah container dari image yang telah dibuat sebelumnya.  
 
-:two" **`-it`**  
+2. **`-it`**  
    → **`-i` (interactive)**: Memungkinkan interaksi dengan terminal dalam container.  
    → **`-t` (tty)**: Memberikan terminal virtual untuk interaksi yang lebih nyaman.  
 
-:three: **`--rm`**  
+3. **`--rm`**  
    → Menghapus container secara otomatis setelah berhenti, sehingga container tidak menumpuk di sistem.  
 
-:four: **`--name c_node_app`**  
+4. **`--name c_node_app`**  
    → Memberikan nama `c_node_app` untuk container yang dijalankan agar lebih mudah dikenali dan dikelola.  
 
-:five: **`-p 3000:8080`**  
+5. **`-p 3000:8080`**  
    → Memetakan **port 3000 di host** ke **port 8080 di dalam container**.  
    → Artinya, aplikasi dalam container yang berjalan di port **8080** akan dapat diakses dari luar melalui port **3000**.  
 
-:six: **`-v "$(pwd)/src:/var/www"`**  
+6. **`-v "$(pwd)/src:/var/www"`**  
    → **Volume binding (mounting)**:  
    → Menghubungkan folder `src` di direktori kerja saat ini (`$(pwd)`) ke `/var/www` dalam container.  
    → Artinya, perubahan pada file dalam `src` akan langsung terlihat di container tanpa perlu membangun ulang image.  
 
-:seven: **`-v /var/www/node_modules`**  
+7. **`-v /var/www/node_modules`**  
    → Menggunakan **anonymous volume** untuk direktori `node_modules` dalam container.  
    → Ini mencegah `node_modules` dalam container ditimpa oleh direktori `node_modules` di host (karena host mungkin memiliki konfigurasi berbeda).  
 
-:eight" **`i_node:22.14-alpine3.20`**  
+8. **`i_node:22.14-alpine3.20`**  
    → Menentukan **image** yang akan digunakan untuk menjalankan container.  
 
 ---
