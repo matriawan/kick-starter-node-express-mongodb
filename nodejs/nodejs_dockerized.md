@@ -40,7 +40,30 @@ CMD ["node", "server.js"]
 
 ---
 
+### **Cara Menggunakan Dockerfile Ini**  
+1️⃣ **Bangun Docker Image**  
+   ```sh
+   docker build -t my-node-app -f node.Dockerfile .
+   ```
+2️⃣ **Jalankan Container**  
+   ```sh
+   docker run -p 3000:3000 my-node-app
+   ```
+
+---
+
+Sekarang **Node.js 22.14** berjalan di atas **Alpine 3.20**, dengan direktori kerja didalam **container** (`/var/www`).
+
+---
+
 ### **Kesimpulan**  
 Dengan Dockerfile ini, pengembang dapat dengan mudah **menjalankan aplikasi Node.js dalam lingkungan yang stabil, ringan, dan terisolasi**, tanpa perlu melakukan konfigurasi manual yang rumit. Hal ini tidak hanya menghemat waktu, tetapi juga memastikan bahwa aplikasi dapat berjalan secara **konsisten** di berbagai lingkungan.  
 
 Semoga ini bermanfaat bagi Anda yang ingin mempercepat workflow pengembangan web dengan pendekatan **Dockerized**! 🚀
+
+
+
+
+
+
+
