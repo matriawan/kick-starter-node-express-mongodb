@@ -119,7 +119,7 @@ CMD ["node", "server.js"]
 ## **Cara Menggunakan Dockerfile Ini**
 
 ### :one: **Bangun Docker Image**  
-Setelah semua file siap, jalankan perintah berikut untuk membangun image:  
+Setelah semua file `node.Dockerfile` selesai dibentuk, jalankan perintah berikut untuk membangun image:  
    ```sh
    docker build -t i_node:22.14-alpine3.20 -f node.Dockerfile .
    ```
