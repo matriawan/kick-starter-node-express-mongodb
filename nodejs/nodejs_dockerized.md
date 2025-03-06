@@ -62,7 +62,7 @@ Buka file `src/app.js` dan tambahkan kode berikut sebagai contoh server sederhan
 const express = require('express');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 // Routing dasar menampilkan pesan 'Hello World!'
 app.get('/', (req, res) => {
@@ -191,7 +191,7 @@ Perintah :two: tersebut menjalankan container **Node.js 22.14 dengan Alpine 3.20
 + **Interaktif** (bisa menggunakan terminal)  
 + **Container otomatis terhapus setelah dihentikan**  
 + **Menggunakan nama `c_node_app`**  
-+ **Port 8080 dalam container dipetakan ke port 3000 di host**  
++ **Port 3000 dalam container dipetakan ke port 8080 di host**  
 + **Kode dalam `src` langsung terhubung ke dalam container di `/var/www`**  
 + **`node_modules` dalam container tetap terisolasi agar kompatibel dengan sistem dalam container**  
 
