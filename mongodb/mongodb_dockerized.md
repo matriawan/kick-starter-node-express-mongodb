@@ -54,7 +54,7 @@ Meskipun memiliki perbedaan arsitektur, SQL dan NoSQL memiliki beberapa kesamaan
 ---
 
 ### **Kesimpulan**  
-📌 **SQL dan NoSQL bukanlah pesaing, melainkan solusi yang disesuaikan dengan kebutuhan aplikasi.** :rocket:  
+:pushpin: **SQL dan NoSQL bukanlah pesaing, melainkan solusi yang disesuaikan dengan kebutuhan aplikasi.** :rocket:  
 Beberapa perusahaan bahkan menggunakan **kombinasi SQL dan NoSQL** dalam sistem mereka untuk mengoptimalkan performa dan fleksibilitas penyimpanan data.
 
 ## Versi MongoDB
@@ -110,7 +110,7 @@ Tabel berikut menunjukkan perbedaan dalam operasi dasar **CRUD** (*Create, Read,
 ---
 
 ### **Kesimpulan**  
-📌 **SQL dan NoSQL memiliki operasi dasar yang mirip, tetapi implementasinya berbeda.**  
+:pushpin: **SQL dan NoSQL memiliki operasi dasar yang mirip, tetapi implementasinya berbeda.**  
 - **SQL lebih ketat dalam skema dan menggunakan query berbasis tabel.**  
 - **NoSQL lebih fleksibel dan menggunakan dokumen JSON/BSON untuk penyimpanan data.**  
 
@@ -134,7 +134,7 @@ Berikut adalah contoh sederhana untuk setiap jenis relasi dalam SQL.
 Setiap entitas di tabel A hanya memiliki satu entitas terkait di tabel B, dan sebaliknya.  
 **Contoh:** Satu pengguna hanya memiliki satu profil.  
 
-📌 **Struktur Tabel:**
+:pushpin: **Struktur Tabel:**
 ```sql
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -149,13 +149,13 @@ CREATE TABLE profiles (
 );
 ```
 
-📌 **Contoh Insert Data:**
+:pushpin: **Contoh Insert Data:**
 ```sql
 INSERT INTO users (name) VALUES ('Alice');
 INSERT INTO profiles (user_id, bio) VALUES (1, 'Software Developer');
 ```
 
-📌 **Contoh Query Join:**
+:pushpin: **Contoh Query Join:**
 ```sql
 SELECT users.name, profiles.bio
 FROM users
@@ -169,7 +169,7 @@ JOIN profiles ON users.id = profiles.user_id;
 Satu entitas di tabel A dapat memiliki banyak entitas di tabel B, tetapi setiap entitas di tabel B hanya terkait dengan satu entitas di tabel A.  
 **Contoh:** Seorang pengguna bisa memiliki banyak pesanan (orders).  
 
-📌 **Struktur Tabel:**
+:pushpin: **Struktur Tabel:**
 ```sql
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -184,14 +184,14 @@ CREATE TABLE orders (
 );
 ```
 
-📌 **Contoh Insert Data:**
+:pushpin: **Contoh Insert Data:**
 ```sql
 INSERT INTO users (name) VALUES ('Bob');
 INSERT INTO orders (user_id, total) VALUES (1, 50.00);
 INSERT INTO orders (user_id, total) VALUES (1, 100.00);
 ```
 
-📌 **Contoh Query Join:**
+:pushpin: **Contoh Query Join:**
 ```sql
 SELECT users.name, orders.id, orders.total
 FROM users
@@ -205,7 +205,7 @@ JOIN orders ON users.id = orders.user_id;
 Satu entitas di tabel A bisa memiliki banyak entitas di tabel B, dan sebaliknya. Untuk mengelola hubungan ini, kita menggunakan tabel penghubung (junction table).  
 **Contoh:** Seorang siswa bisa mengambil banyak mata kuliah, dan satu mata kuliah bisa diambil oleh banyak siswa.  
 
-📌 **Struktur Tabel:**
+:pushpin: **Struktur Tabel:**
 ```sql
 CREATE TABLE students (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -226,7 +226,7 @@ CREATE TABLE student_courses (  -- Tabel penghubung
 );
 ```
 
-📌 **Contoh Insert Data:**
+:pushpin: **Contoh Insert Data:**
 ```sql
 INSERT INTO students (name) VALUES ('Charlie');
 INSERT INTO courses (course_name) VALUES ('Mathematics');
@@ -237,7 +237,7 @@ INSERT INTO student_courses (student_id, course_id) VALUES (1, 1);
 INSERT INTO student_courses (student_id, course_id) VALUES (1, 2);
 ```
 
-📌 **Contoh Query Join:**
+:pushpin: **Contoh Query Join:**
 ```sql
 SELECT students.name, courses.course_name
 FROM students
@@ -272,7 +272,7 @@ SELECT users.name, orders.total
 FROM users
 JOIN orders ON users.id = orders.user_id;
 ```
-📌 **Catatan:** Jika hanya ditulis `JOIN`, maka **secara default** dianggap sebagai **INNER JOIN**.  
+:pushpin: **Catatan:** Jika hanya ditulis `JOIN`, maka **secara default** dianggap sebagai **INNER JOIN**.  
 
 ---
 
@@ -435,7 +435,7 @@ FROM users
 INNER JOIN orders ON users.id = orders.user_id;
 ```
 
-📌 **Alasannya:**  
+:pushpin: **Alasannya:**  
 1. `INNER JOIN` adalah JOIN yang paling umum digunakan.  
 2. JOIN tanpa kata kunci tambahan lebih mudah dibaca dan dipahami.  
 3. `INNER JOIN` hanya mengambil data yang valid dari kedua tabel.  
@@ -540,7 +540,7 @@ SELECT users.name, orders.total
 FROM users
 CROSS JOIN orders;
 ```
-📌 **Efeknya:** Setiap baris dari `users` akan dikombinasikan dengan setiap baris dari `orders` (perkalian Cartesian).
+:pushpin: **Efeknya:** Setiap baris dari `users` akan dikombinasikan dengan setiap baris dari `orders` (perkalian Cartesian).
 
 ---
 
@@ -574,9 +574,9 @@ Berikut adalah contoh sederhana dan lengkap untuk setiap jenis **relasi dalam No
 **Penjelasan:**  
 Dalam MongoDB, relasi **One-to-One** biasanya disimpan sebagai embedded document dalam satu koleksi (karena lebih efisien untuk data yang jarang berubah).  
 
-📌 **Contoh:** Satu pengguna memiliki satu profil.  
+:pushpin: **Contoh:** Satu pengguna memiliki satu profil.  
 
-📌 **Struktur Dokumen:**  
+:pushpin: **Struktur Dokumen:**  
 ```json
 {
     "_id": ObjectId("1234567890"),
@@ -587,7 +587,7 @@ Dalam MongoDB, relasi **One-to-One** biasanya disimpan sebagai embedded document
 }
 ```
 
-📌 **Query Insert Data:**  
+:pushpin: **Query Insert Data:**  
 ```js
 db.users.insertOne({
     name: "Alice",
@@ -597,7 +597,7 @@ db.users.insertOne({
 });
 ```
 
-📌 **Query untuk Menampilkan Data:**  
+:pushpin: **Query untuk Menampilkan Data:**  
 ```js
 db.users.findOne({ name: "Alice" });
 ```
@@ -608,10 +608,10 @@ db.users.findOne({ name: "Alice" });
 **Penjelasan:**  
 Dalam MongoDB, relasi **One-to-Many** bisa disimpan dengan **referencing** atau **embedding**.  
 
-📌 **Contoh:** Seorang pengguna bisa memiliki banyak pesanan (orders).  
+:pushpin: **Contoh:** Seorang pengguna bisa memiliki banyak pesanan (orders).  
 
 ### **Metode Referencing (Disarankan untuk data yang sering berubah)**  
-📌 **Struktur Dokumen (users):**  
+:pushpin: **Struktur Dokumen (users):**  
 ```json
 {
     "_id": ObjectId("user123"),
@@ -619,7 +619,7 @@ Dalam MongoDB, relasi **One-to-Many** bisa disimpan dengan **referencing** atau 
 }
 ```
 
-📌 **Struktur Dokumen (orders):**  
+:pushpin: **Struktur Dokumen (orders):**  
 ```json
 {
     "_id": ObjectId("order001"),
@@ -628,7 +628,7 @@ Dalam MongoDB, relasi **One-to-Many** bisa disimpan dengan **referencing** atau 
 }
 ```
 
-📌 **Query Insert Data:**  
+:pushpin: **Query Insert Data:**  
 ```js
 db.users.insertOne({ _id: ObjectId("user123"), name: "Bob" });
 
@@ -638,7 +638,7 @@ db.orders.insertMany([
 ]);
 ```
 
-📌 **Query untuk Join (Aggregation Lookup):**  
+:pushpin: **Query untuk Join (Aggregation Lookup):**  
 ```js
 db.users.aggregate([
     {
@@ -653,7 +653,7 @@ db.users.aggregate([
 ```
 
 ### **Metode Embedding (Disarankan untuk data yang jarang berubah)**  
-📌 **Struktur Dokumen (users):**  
+:pushpin: **Struktur Dokumen (users):**  
 ```json
 {
     "_id": ObjectId("user123"),
@@ -665,7 +665,7 @@ db.users.aggregate([
 }
 ```
 
-📌 **Query Insert Data:**  
+:pushpin: **Query Insert Data:**  
 ```js
 db.users.insertOne({
     name: "Bob",
@@ -682,10 +682,10 @@ db.users.insertOne({
 **Penjelasan:**  
 Relasi **Many-to-Many** biasanya menggunakan **referencing** dengan koleksi penghubung atau menyimpan daftar referensi dalam array.  
 
-📌 **Contoh:** Seorang siswa bisa mengambil banyak mata kuliah, dan satu mata kuliah bisa diambil oleh banyak siswa.  
+:pushpin: **Contoh:** Seorang siswa bisa mengambil banyak mata kuliah, dan satu mata kuliah bisa diambil oleh banyak siswa.  
 
 ### **Metode Referencing (Menggunakan Koleksi Penghubung)**  
-📌 **Struktur Dokumen (students):**  
+:pushpin: **Struktur Dokumen (students):**  
 ```json
 {
     "_id": ObjectId("student123"),
@@ -693,7 +693,7 @@ Relasi **Many-to-Many** biasanya menggunakan **referencing** dengan koleksi peng
 }
 ```
 
-📌 **Struktur Dokumen (courses):**  
+:pushpin: **Struktur Dokumen (courses):**  
 ```json
 {
     "_id": ObjectId("course101"),
@@ -701,7 +701,7 @@ Relasi **Many-to-Many** biasanya menggunakan **referencing** dengan koleksi peng
 }
 ```
 
-📌 **Struktur Dokumen (student_courses - Koleksi Penghubung):**  
+:pushpin: **Struktur Dokumen (student_courses - Koleksi Penghubung):**  
 ```json
 {
     "student_id": ObjectId("student123"),
@@ -709,7 +709,7 @@ Relasi **Many-to-Many** biasanya menggunakan **referencing** dengan koleksi peng
 }
 ```
 
-📌 **Query Insert Data:**  
+:pushpin: **Query Insert Data:**  
 ```js
 db.students.insertOne({ _id: ObjectId("student123"), name: "Charlie" });
 
@@ -724,7 +724,7 @@ db.student_courses.insertMany([
 ]);
 ```
 
-📌 **Query untuk Join (Aggregation Lookup):**  
+:pushpin: **Query untuk Join (Aggregation Lookup):**  
 ```js
 db.student_courses.aggregate([
     {
@@ -747,7 +747,7 @@ db.student_courses.aggregate([
 ```
 
 ### **Metode Embedding (Jika Relasi Tidak Banyak)**  
-📌 **Struktur Dokumen (students dengan daftar mata kuliah):**  
+:pushpin: **Struktur Dokumen (students dengan daftar mata kuliah):**  
 ```json
 {
     "_id": ObjectId("student123"),
@@ -759,7 +759,7 @@ db.student_courses.aggregate([
 }
 ```
 
-📌 **Query Insert Data:**  
+:pushpin: **Query Insert Data:**  
 ```js
 db.students.insertOne({
     name: "Charlie",
