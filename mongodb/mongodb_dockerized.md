@@ -885,6 +885,7 @@ CMD ["mongod", "--bind_ip", "0.0.0.0"]
 
 ## **Cara Menggunakan Dockerfile ini**
 1. **Bangun Image Docker**
+   Pastikan masuk kedalam direktori tepat dimana file *mongodb.Dockerfile* berada.
    ```sh
    docker build -t i_mongodb:5.0.10 -f mongodb.Dockerfile .
    ```
@@ -903,6 +904,7 @@ CMD ["mongod", "--bind_ip", "0.0.0.0"]
      i_mongodb:5.0.10
    ```
    - **`-d`** &rarr; Menjalankan container di background.
+   - **`--rm`** &rarr; menghapus container secara otomatis setelah container berhenti agart idak menumpk di sistem (Guest OS).
    - **`--name c_mongodb`** &rarr; Memberi nama container.
    - **`-p 8081:27017`** &rarr; Mengekspos **port 27017** sebagai **8081**.
    - **`-e`** &rarr; Menyetel environment variables.
