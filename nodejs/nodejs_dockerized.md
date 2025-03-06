@@ -92,7 +92,7 @@ Berikut adalah **Dockerfile** yang siap digunakan:
 
 ---
 
-## **node.Dockerfile**  
+## **node.Dockerfile** (Basic)  
 ```dockerfile
 # Menggunakan image Node.js 22.14 berbasis Alpine 3.20
 FROM node:22.14-alpine3.20
@@ -214,7 +214,7 @@ Dengan Dockerfile ini, pengembang dapat dengan mudah **menjalankan aplikasi Node
 Semoga ini bermanfaat bagi Anda yang ingin mempercepat workflow pengembangan web dengan pendekatan **Dockerized**! 🚀
 
 
-## Dockerfile dengan dukungan Dev dan Prod
+## Dockerfile dengan dukungan Dev dan Prod (Advanced)
 
 Berikut adalah Dockerfile yang mendukung lingkungan Development dan Production, serta menyertakan paket Express.js dan MongoDB driver:
 
