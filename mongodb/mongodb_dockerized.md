@@ -894,7 +894,7 @@ CMD ["mongod", "--bind_ip", "0.0.0.0"]
 
 2. **Menjalankan Container MongoDB**
    ```sh
-   docker run -d --name c_mongodb \
+   docker run -d --rm --name c_mongodb \
      -p 8081:27017 \
      -e MONGO_INITDB_ROOT_USERNAME=root \
      -e MONGO_INITDB_ROOT_PASSWORD=Secret! \
