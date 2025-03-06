@@ -57,6 +57,8 @@ Meskipun memiliki perbedaan arsitektur, SQL dan NoSQL memiliki beberapa kesamaan
 :pushpin: **SQL dan NoSQL bukanlah pesaing, melainkan solusi yang disesuaikan dengan kebutuhan aplikasi.** :rocket:  
 Beberapa perusahaan bahkan menggunakan **kombinasi SQL dan NoSQL** dalam sistem mereka untuk mengoptimalkan performa dan fleksibilitas penyimpanan data.
 
+---
+
 ## Versi MongoDB
 
 MongoDB tersedia dalam dua versi utama: **MongoDB Enterprise** dan **MongoDB Community**.  
