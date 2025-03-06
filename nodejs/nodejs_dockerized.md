@@ -214,6 +214,127 @@ Dengan Dockerfile ini, pengembang dapat dengan mudah **menjalankan aplikasi Node
 Semoga ini bermanfaat bagi Anda yang ingin mempercepat workflow pengembangan web dengan pendekatan **Dockerized**! 🚀
 
 
+## Dockerfile dengan dukungan Dev dan Prod
+
+Berikut adalah Dockerfile yang mendukung lingkungan Development dan Production, serta menyertakan paket Express.js dan MongoDB driver:
+
+Berikut adalah **Dockerfile** yang mendukung lingkungan **Development** dan **Production**, serta menyertakan paket **Express.js** dan **MongoDB** driver:  
+
+---
+
+### **Dockerfile: `node.Dockerfile`**  
+```dockerfile
+# Dockerfile untuk Node.js 22.14 dengan Alpine 3.20
+# Menyediakan lingkungan Development dan Production
+
+# --------------------------------------------
+# Stage Base
+# --------------------------------------------
+# Menggunakan image Node.js 22.14 berbasis Alpine 3.20
+FROM node:22.14-alpine3.20 AS base
+
+# Menetapkan direktori kerja dalam container
+WORKDIR /var/www
+
+# Menyalin file package.json dan package-lock.json
+COPY package*.json ./
+
+# Menginstal Express dan MongoDB driver
+RUN npm install express mongoose
+
+# --------------------------------------------
+# Stage untuk Development
+# --------------------------------------------
+FROM base AS development
+
+# Menginstal semua dependencies termasuk devDependencies
+RUN npm install
+
+# Instal nodemon untuk auto-restart saat pengembangan
+RUN npm install -g nodemon
+
+# Menyalin seluruh kode aplikasi ke dalam container
+COPY . .
+
+# Menjalankan aplikasi dengan nodemon untuk auto-restart saat pengembangan
+CMD ["nodemon", "app.js"]
+
+# --------------------------------------------
+# Stage untuk Production
+# --------------------------------------------
+FROM base AS production
+
+# Hanya menginstal dependencies yang dibutuhkan di production
+RUN npm install --only=production
+
+# Menyalin seluruh kode aplikasi ke dalam container
+COPY . .
+
+# Menjalankan aplikasi dengan Node.js langsung tanpa nodemon
+CMD ["node", "app.js"]
+```
+
+---
+
+### **Cara Menggunakan Dockerfile**
+Berikut langkah-langkah membangun dan menjalankan container menggunakan **Dockerfile** ini:
+
+#### **1. Membangun Image Docker**
+Gunakan perintah berikut untuk membuat image berdasarkan lingkungan yang diinginkan:
+
+- **Untuk Development:**
+  ```sh
+  docker build -t node_dev:22.14-alpine3.20 --target=development -f node.Dockerfile .
+  ```
+  **Penjelasan:**  
+  - `docker build` → Perintah untuk membangun image.  
+  - `-t node_dev:22.14-alpine3.20` → Memberikan nama (`node_dev`) dan tag (`22.14-alpine3.20`).  
+  - `--target=development` → Menentukan bahwa build akan menggunakan tahap **development**.  
+  - `-f node.Dockerfile` → Menentukan file Docker yang digunakan.  
+  - `.` → Menunjukkan lokasi konteks build (direktori saat ini).  
+
+- **Untuk Production:**
+  ```sh
+  docker build -t node_prod:22.14-alpine3.20 --target=production -f node.Dockerfile .
+  ```
+  **Perbedaannya hanya pada target:** Production hanya menginstal dependencies yang diperlukan.
+
+---
+
+#### **2. Menjalankan Container**
+Setelah image dibuat, jalankan container dengan perintah berikut:
+
+- **Untuk Development (hot-reload dengan `nodemon`):**
+  ```sh
+  docker run -it --rm --name dev_node -p 8080:3000 -v "$(pwd)/src:/var/www" -v /var/www/node_modules node_dev:22.14-alpine3.20
+  ```
+  **Penjelasan:**  
+  - `docker run` → Perintah untuk menjalankan container.  
+  - `-it` → Menjalankan container dalam mode interaktif.  
+  - `--rm` → Menghapus container setelah dihentikan.  
+  - `--name dev_node` → Menentukan nama container (`dev_node`).  
+  - `-p 8080:3000` → Memetakan port host `8080` ke port `3000` dalam container.  
+  - `-v "$(pwd)/src:/var/www"` → Menghubungkan folder proyek ke dalam container agar perubahan langsung tercermin.  
+  - `-v /var/www/node_modules` → Menghindari penghapusan `node_modules` dari container akibat mount.  
+  - `node_dev:22.14-alpine3.20` → Nama image yang digunakan.  
+
+- **Untuk Production (tanpa hot-reload):**
+  ```sh
+  docker run -d --name prod_node -p 8080:3000 node_prod:22.14-alpine3.20
+  ```
+  **Penjelasan:**  
+  - `-d` → Menjalankan container di background.  
+  - `--name prod_node` → Nama container (`prod_node`).  
+  - `-p 8080:3000` → Memetakan port host `8080` ke `3000`.  
+  - `node_prod:22.14-alpine3.20` → Image yang digunakan untuk production.  
+
+---
+
+### **Kesimpulan**
+Dockerfile ini memungkinkan pengembang menjalankan aplikasi **Node.js** dengan **Express.js** dan **MongoDB** dalam lingkungan **Development** (dengan hot-reload `nodemon`) serta **Production** (tanpa nodemon). Dengan pendekatan multi-stage build ini, ukuran image tetap ringan dan efisien sesuai kebutuhan masing-masing lingkungan. :rocket:
+
+
+
 
 
 
