@@ -171,9 +171,9 @@ perintah ke :two: tersebut bertujuan untuk **menjalankan container** dari image 
 4. **`--name c_node_app`**  
    → Memberikan nama `c_node_app` untuk container yang dijalankan agar lebih mudah dikenali dan dikelola.  
 
-5. **`-p 3000:8080`**  
-   → Memetakan **port 3000 di host** ke **port 8080 di dalam container**.  
-   → Artinya, aplikasi dalam container yang berjalan di port **8080** akan dapat diakses dari luar melalui port **3000**.  
+5. **`-p 8080:3000`**  
+   → Memetakan **port 8080 di host** ke **port 3000 di dalam container**.  
+   → Artinya, aplikasi dalam container yang berjalan di port **3000** akan dapat diakses dari luar melalui port **8080**.  
 
 6. **`-v "$(pwd)/src:/var/www"`**  
    → **Volume binding (mounting)**:  
