@@ -184,58 +184,6 @@ Jika berhasil, akan muncul output seperti ini:
 
 ---
 
-### **2. MongoDB Compass**
-MongoDB Compass adalah **GUI (Graphical User Interface)** untuk mengelola database MongoDB.
-
-#### **Cara Menggunakan Compass dengan Node.js**
-1. **Unduh & Instal MongoDB Compass** → [Download di sini](https://www.mongodb.com/try/download/compass).
-2. **Buka MongoDB Compass** dan masukkan **URI MongoDB** (misalnya `mongodb://localhost:27017`).
-3. **Jelajahi database**, buat koleksi, jalankan query, dan ekspor data dengan tampilan grafis.
-
-#### **✅ Kelebihan dan ❌ Kekurangan MongoDB Compass**
-| Kelebihan | Kekurangan |
-|-----------|------------|
-| 🟢 **Gratis & Open-Source** | 🔴 Tidak dapat digunakan dalam kode (hanya GUI) |
-| 🟢 **Mudah digunakan, cocok untuk pemula** | 🔴 Tidak mendukung akses remote tanpa setting tambahan |
-| 🟢 **Menampilkan data secara visual (chart & statistik)** | |
-
----
-
-### **3. MongoDB Atlas**
-MongoDB Atlas adalah **platform cloud yang dikelola oleh MongoDB**.
-
-#### **Cara Menghubungkan Node.js ke MongoDB Atlas**
-1. **Buat Akun** di [MongoDB Atlas](https://www.mongodb.com/atlas).
-2. **Buat Cluster & Dapatkan URI Koneksi** dari MongoDB Atlas.
-3. **Gunakan URI tersebut dalam kode Node.js**, misalnya:
-   ```javascript
-   const uri = "mongodb+srv://username:password@cluster.mongodb.net/?retryWrites=true&w=majority";
-   const client = new MongoClient(uri);
-   ```
-4. **Jalankan kode seperti contoh di atas**.
-
-#### **✅ Kelebihan dan ❌ Kekurangan MongoDB Atlas**
-| Kelebihan | Kekurangan |
-|-----------|------------|
-| 🟢 **Cloud-based, dapat diakses dari mana saja** | 🔴 Berbayar untuk skala besar |
-| 🟢 **Otomatis backup & scaling** | 🔴 Perlu internet untuk akses database |
-| 🟢 **Tersedia versi gratis untuk proyek kecil** | |
-
----
-
-## **Kesimpulan**
-| Platform | Gratis | GUI | Cocok untuk |
-|----------|--------|-----|-------------|
-| **MongoDB Native Driver** | ✅ | ❌ | Pengembang yang ingin kontrol penuh lewat kode |
-| **MongoDB Compass** | ✅ | ✅ | Pemula yang butuh tampilan grafis |
-| **MongoDB Atlas** | ✅ (untuk skala kecil) | ✅ | Tim yang butuh solusi cloud dan akses global |
-
-Jika Anda ingin mengelola MongoDB **sepenuhnya melalui kode**, gunakan **MongoDB Native Driver**. Jika Anda ingin kemudahan **dengan GUI**, gunakan **MongoDB Compass**. Jika ingin solusi berbasis **cloud**, gunakan **MongoDB Atlas**.
-
-🔥 **Rekomendasi:** Untuk proyek kecil gunakan **MongoDB Compass** + **Native Driver**, sedangkan untuk proyek besar gunakan **MongoDB Atlas**. 🚀
-
----
-
 ## **2. GUI (Graphical User Interface) untuk MongoDB**  
 
 ### **a. MongoDB Compass (GUI Resmi MongoDB)**  
@@ -249,6 +197,18 @@ MongoDB Compass adalah GUI resmi dari MongoDB yang memungkinkan pengguna untuk m
 :white_check_mark: Manajemen indeks dan validasi skema.  
 
 🔗 **Download**: [https://www.mongodb.com/products/compass](https://www.mongodb.com/products/compass)  
+
+#### **Cara Menggunakan Compass dengan Node.js**
+1. **Unduh & Instal MongoDB Compass** → [Download di sini](https://www.mongodb.com/try/download/compass).
+2. **Buka MongoDB Compass** dan masukkan **URI MongoDB** (misalnya `mongodb://localhost:27017`).
+3. **Jelajahi database**, buat koleksi, jalankan query, dan ekspor data dengan tampilan grafis.
+
+#### **✅ Kelebihan dan ❌ Kekurangan MongoDB Compass**
+| Kelebihan | Kekurangan |
+|-----------|------------|
+| 🟢 **Gratis & Open-Source** | 🔴 Tidak dapat digunakan dalam kode (hanya GUI) |
+| 🟢 **Mudah digunakan, cocok untuk pemula** | 🔴 Tidak mendukung akses remote tanpa setting tambahan |
+| 🟢 **Menampilkan data secara visual (chart & statistik)** | |
 
 ---  
 
@@ -309,6 +269,23 @@ MongoDB Atlas adalah layanan **Database-as-a-Service (DBaaS)** yang memungkinkan
 
 🔗 **Daftar & Gunakan MongoDB Atlas:** [https://www.mongodb.com/atlas](https://www.mongodb.com/atlas)  
 
+#### **Cara Menghubungkan Node.js ke MongoDB Atlas**
+1. **Buat Akun** di [MongoDB Atlas](https://www.mongodb.com/atlas).
+2. **Buat Cluster & Dapatkan URI Koneksi** dari MongoDB Atlas.
+3. **Gunakan URI tersebut dalam kode Node.js**, misalnya:
+   ```javascript
+   const uri = "mongodb+srv://username:password@cluster.mongodb.net/?retryWrites=true&w=majority";
+   const client = new MongoClient(uri);
+   ```
+4. **Jalankan kode seperti contoh di atas**.
+
+#### **✅ Kelebihan dan ❌ Kekurangan MongoDB Atlas**
+| Kelebihan | Kekurangan |
+|-----------|------------|
+| 🟢 **Cloud-based, dapat diakses dari mana saja** | 🔴 Berbayar untuk skala besar |
+| 🟢 **Otomatis backup & scaling** | 🔴 Perlu internet untuk akses database |
+| 🟢 **Tersedia versi gratis untuk proyek kecil** | |
+
 ---
 
 ## **3. Cara Menggunakan MongoDB Atlas**  
@@ -355,7 +332,18 @@ run().catch(console.dir);
 - **MongoDB Atlas** menyediakan **GUI berbasis web**, mirip dengan **phpMyAdmin untuk MySQL**.  
 - Jika ingin mengakses MongoDB Atlas dari komputer lokal, bisa menggunakan **Compass, shell MongoDB, atau kode dalam aplikasi**.  
 
+| Platform | Gratis | GUI | Cocok untuk |
+|----------|--------|-----|-------------|
+| **MongoDB Native Driver** | ✅ | ❌ | Pengembang yang ingin kontrol penuh lewat kode |
+| **MongoDB Compass** | ✅ | ✅ | Pemula yang butuh tampilan grafis |
+| **MongoDB Atlas** | ✅ (untuk skala kecil) | ✅ | Tim yang butuh solusi cloud dan akses global |
+
 :fire: **MongoDB Atlas adalah pilihan terbaik jika ingin solusi praktis tanpa repot mengelola server sendiri!** 🚀  
+
+Jika Anda ingin mengelola MongoDB **sepenuhnya melalui kode**, gunakan **MongoDB Native Driver**. Jika Anda ingin kemudahan **dengan GUI**, gunakan **MongoDB Compass**. Jika ingin solusi berbasis **cloud**, gunakan **MongoDB Atlas**.
+
+🔥 **Rekomendasi:** Untuk proyek kecil gunakan **MongoDB Compass** + **Native Driver**, sedangkan untuk proyek besar gunakan **MongoDB Atlas**. 🚀
+
 
 ---
 
