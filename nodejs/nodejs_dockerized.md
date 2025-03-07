@@ -32,15 +32,20 @@ Namun untuk percobaan sekarang ini, cukup membuat folder **node_web_app** sebaga
 ### **Langkah-langkah Persiapan Sebelum Menjalankan Docker**  
 
 #### **:one: Buat struktur folder proyek**  
-Jalankan perintah berikut untuk membuat folder proyek dan subfoldernya:  
 
 ```sh
 mkdir -p node_web_app/src
 cd node_web_app
 ```
 
+
 #### **:two: Inisialisasi proyek Node.js**  
-Di dalam folder `node_web_app`, jalankan:  
+Di dalam folder `node_web_app`, Jalankan perintah berikut ***jika node telah diinstall di komputer perangkat pengguna*** untuk membuat dan menginisiasi folder proyek dan subfoldernya ***jika telah mengistall Node.js pada komputer** sebagai tempat kode sumber Node.js:  
+
+Jika tanpa instalasi `node` diperangkat komputer pengguna, jalankan perintah berikut.
+
+idenya menjalankan terlebih dahulu docker mongodb dengan `interactive terminal` untuk melakukan inisiasi folder projek Node.js.
+
 
 ```sh
 npm init -y
@@ -109,8 +114,8 @@ RUN npm install express mongoose --save
 # Menyalin seluruh kode aplikasi ke dalam container
 COPY . .
 
-# Menjalankan aplikasi pada port 3000
-EXPOSE 3000
+# Mengkases port Node.js (app.js 30000) sebagai 8080
+EXPOSE 8080
 
 # Menjalankan perintah untuk memulai aplikasi
 CMD ["node", "app.js"]
