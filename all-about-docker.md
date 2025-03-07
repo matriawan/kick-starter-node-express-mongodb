@@ -44,7 +44,7 @@ RUN npm install
 COPY . .
 
 # Menjalankan aplikasi pada port tertentu
-EXPOSE 3000
+EXPOSE 8080
 
 # Menjalankan perintah untuk memulai aplikasi
 CMD ["node", "server.js"]
