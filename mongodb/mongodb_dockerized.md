@@ -1230,7 +1230,7 @@ Maka kita **bisa langsung menjalankan container MongoDB tanpa `-e`** seperti ber
 docker run -d --name c_mongodb \
   -p 8081:27017 \
   -v v_mongodb_data:/data/db \
-  my_mongodb:5.0.10
+  i_mongodb:5.0.10
 ```
 - **Tanpa `-e`**, MongoDB akan tetap menggunakan:
   - Username: **root**
@@ -1258,7 +1258,7 @@ Anda hanya perlu menggunakan `-e` jika:
     -e MONGO_INITDB_ROOT_USERNAME=admin \
     -e MONGO_INITDB_ROOT_PASSWORD=NewPass123 \
     -e MONGO_INITDB_DATABASE=CustomDB \
-    my_mongodb:5.0.10
+    i_mongodb:5.0.10
   ```
   &rarr; Ini akan **mengganti** username, password, dan nama database dengan yang baru.
 
