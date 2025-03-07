@@ -60,10 +60,10 @@ CMD ["node", "server.js"]
    ```
 3. **Jalankan Container** → Setelah image dibuat, jalankan:  
    ```sh
-   docker run -p 3000:3000 my-node-app
+   docker run -p 8080:3000 my-node-app
    ```
 
-Hasilnya, aplikasi Node.js akan berjalan di dalam container tanpa perlu menginstal Node.js secara manual di mesin lokal.
+Hasilnya, aplikasi Node.js akan berjalan di dalam container tanpa perlu menginstal Node.js secara manual di mesin lokal yang dapat diakses melalui port 8080.
 
 ---
 
