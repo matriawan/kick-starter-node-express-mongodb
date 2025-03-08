@@ -1270,3 +1270,166 @@ Anda hanya perlu menggunakan `-e` jika:
 :white_check_mark: **Gunakan `-e` hanya jika ingin mengganti variabel default yang ada di `Dockerfile`**.  
 
 Jadi, Anda **bisa langsung menjalankan `docker run` tanpa `-e` dan MongoDB tetap berfungsi seperti yang diharapkan! :rocket:**
+
+---
+
+# 🔍 MongoDB Validation: Menjaga Integritas Data dengan JSON Schema & Mongoose ENUM
+
+## Pendahuluan
+
+Di dunia pengelolaan database, validasi data sangat penting untuk memastikan bahwa setiap informasi yang tersimpan sesuai dengan aturan yang telah ditetapkan. MongoDB, sebagai database NoSQL yang fleksibel, memberikan keleluasaan dalam menyimpan data, namun tanpa validasi yang tepat, kesalahan input bisa terjadi dan berdampak pada keakuratan serta keamanan data.
+
+Dalam lingkungan tradisional, validasi biasanya dilakukan oleh aplikasi sebelum data dikirim ke database. Namun, MongoDB menawarkan fitur Schema Validation yang memungkinkan aturan validasi diterapkan langsung di database, sehingga dapat mencegah data tidak valid tersimpan sejak awal. Selain itu, jika menggunakan Mongoose dalam aplikasi berbasis Node.js, kita dapat menerapkan validasi ENUM untuk memastikan hanya nilai tertentu yang diterima.
+
+
+
+Berikut penjelasan sistematis mengenai **MongoDB Validation** dengan dua pendekatan:  
+
+1. **Menggunakan Schema Validation (JSON Schema) di MongoDB**  
+2. **Menggunakan Validasi di Aplikasi dengan Mongoose (Node.js)**  
+
+Pada artikel ini, kita akan membahas dua pendekatan utama untuk validasi di MongoDB menggunakan contoh data berikut:
+
+```json
+{
+  "id_number": 123456,
+  "user_name": "Alice",
+  "user_photo": "default.png",
+  "user_department": "Computer Engineering Department",
+  "user_gender": "Female",
+  "user_expertise": "Software Engineering"
+}
+```
+
+---
+
+## **1️⃣ MongoDB Validation dengan JSON Schema (Tanpa Aplikasi)**  
+
+MongoDB mendukung **schema validation** menggunakan **JSON Schema**. Kita bisa membuat aturan agar **user_gender** hanya menerima nilai `"Male"` atau `"Female"`, serta memastikan field tertentu wajib diisi.  
+
+### **Membuat Collection dengan Schema Validation**  
+Gunakan perintah berikut di MongoDB shell atau MongoDB Compass (Tab **Validation**):
+
+```js
+db.createCollection("users", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["id_number", "user_name", "user_gender"],
+      properties: {
+        id_number: {
+          bsonType: "int",
+          description: "Harus berupa angka integer"
+        },
+        user_name: {
+          bsonType: "string",
+          description: "Harus berupa string"
+        },
+        user_photo: {
+          bsonType: "string",
+          description: "Harus berupa string"
+        },
+        user_department: {
+          bsonType: "string",
+          description: "Harus berupa string"
+        },
+        user_gender: {
+          enum: ["Male", "Female"], // ENUM Validation
+          description: "Hanya bisa berisi 'Male' atau 'Female'"
+        },
+        user_expertise: {
+          bsonType: "string",
+          description: "Harus berupa string"
+        }
+      }
+    }
+  }
+})
+```
+
+📌 **Hasilnya:**  
+✅ **Data valid** seperti contoh di atas akan berhasil dimasukkan.  
+❌ **Jika kita mencoba memasukkan `user_gender: "Other"` atau menghilangkan `user_name`**, MongoDB akan menolak data tersebut.
+
+---
+
+## **2️⃣ Validasi ENUM di Aplikasi dengan Mongoose (Node.js)**  
+
+Jika kita menggunakan **Node.js dan Mongoose**, validasi ENUM bisa dilakukan di aplikasi tanpa bergantung pada MongoDB.  
+
+### **Membuat Model Mongoose dengan ENUM**
+```js
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema({
+  id_number: {
+    type: Number,
+    required: true
+  },
+  user_name: {
+    type: String,
+    required: true
+  },
+  user_photo: String,
+  user_department: String,
+  user_gender: {
+    type: String,
+    enum: ["Male", "Female"], // ENUM Validation
+    required: true
+  },
+  user_expertise: String
+});
+
+const User = mongoose.model("User", userSchema);
+```
+
+### **Mencoba Insert Data Valid & Invalid**
+```js
+async function run() {
+  await mongoose.connect("mongodb://localhost:27017/mydatabase");
+
+  try {
+    const user1 = new User({
+      id_number: 123456,
+      user_name: "Alice",
+      user_photo: "default.png",
+      user_department: "Computer Engineering Department",
+      user_gender: "Female",
+      user_expertise: "Software Engineering"
+    });
+
+    await user1.save();
+    console.log("User berhasil disimpan!");
+
+    // Coba insert data dengan gender tidak valid
+    const user2 = new User({
+      id_number: 123457,
+      user_name: "Bob",
+      user_gender: "Other" // ❌ Ini akan gagal karena ENUM hanya "Male" atau "Female"
+    });
+
+    await user2.save();
+  } catch (error) {
+    console.error("Terjadi kesalahan:", error.message);
+  } finally {
+    mongoose.disconnect();
+  }
+}
+
+run();
+```
+
+📌 **Hasilnya:**  
+✅ **Jika `user_gender` adalah "Male" atau "Female"**, data akan tersimpan.  
+❌ **Jika `user_gender` adalah nilai lain**, aplikasi akan menampilkan error.
+
+---
+
+## **Kesimpulan**  
+| Metode | Kelebihan | Kekurangan |
+|--------|----------|------------|
+| **MongoDB Schema Validation** | Tidak perlu validasi di aplikasi, langsung di database | Tidak fleksibel jika ingin menyesuaikan aturan khusus |
+| **Mongoose ENUM Validation** | Lebih fleksibel, bisa dikombinasikan dengan validasi lain | Tidak melindungi data jika dimasukkan langsung lewat MongoDB |
+
+🚀 **Gunakan Schema Validation jika ingin memastikan data tetap bersih langsung dari MongoDB.**  
+💡 **Gunakan Mongoose Validation jika ingin kontrol lebih dalam aplikasi Node.js.**
