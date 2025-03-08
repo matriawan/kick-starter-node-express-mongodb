@@ -10,9 +10,6 @@ COPY package*.json ./
 # Menginstal dependencies yang diperlukan (Express & Mongoose)
 RUN npm install express mongoose --save
 
-# Mengekspos port aplikasi (3000) sebagai 8080
-EXPOSE 8080
-
 # --------------------------------------------
 # Stage untuk Development
 # --------------------------------------------
@@ -27,6 +24,9 @@ RUN npm install -g nodemon
 # Menyalin seluruh kode aplikasi ke dalam container
 COPY . .
 
+# Mengekspos port aplikasi (pada file app.js 3000) agar dapat diakses diluar container
+EXPOSE 3000
+
 # Menjalankan aplikasi dengan nodemon untuk auto-restart saat pengembangan
 CMD ["nodemon", "app.js"]
 
@@ -40,6 +40,9 @@ RUN npm install --only=production
 
 # Menyalin seluruh kode aplikasi ke dalam container
 COPY . .
+
+# Mengekspos port aplikasi (pada file app.js 3000) agar dapat diakses diluar container
+EXPOSE 3000
 
 # Menjalankan aplikasi dengan Node.js langsung tanpa nodemon
 CMD ["node", "app.js"]
