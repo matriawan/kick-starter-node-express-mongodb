@@ -1,0 +1,39 @@
+services:
+  webserver:
+    container_name: c_nodejs_attendance_app_user
+    restart: always
+    build:
+      context: .
+      dockerfile: nodejs.Dockerfile
+    image: 'i_node:22.14-alpine3.20'
+    volumes:
+      - ./src:/var/www/
+      - /var/www/node_modules
+    ports:
+      - 8080:3000
+    networks:
+      - net_attendance_app_user
+    depends_on:
+      - database
+
+  database:
+    container_name: c_mongodb_attendance_app_user
+    image: 'i_mongodb:5.0.10'
+    restart: always
+    build:
+      context: .
+      dockerfile: mongodb.Dockerfile
+    volumes:
+      - volume_attendance_app_user:/data/db
+    ports:
+      - 8081:27017
+    networks:
+      - net_attendance_app_user
+
+volumes:
+  volume_attendance_app_user:
+
+networks:
+  net_attendance_app_user:
+    
+
