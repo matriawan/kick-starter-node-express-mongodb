@@ -14,7 +14,7 @@ services:
       - ./src:/var/www/  # Sinkronisasi kode applikasi dari host ke dalam container untuk dev
       - /var/www/node_modules  # Menjaga node_modules tetap ada di dalam container
     ports:
-      - "${NODEJS_PORT}:3000"    # Expose port dinamis (pemetaan dari internal container agar dapat diakses oleh host/diluar container) dari .env
+      - "${NODEJS_PORT}:3000"  # Expose port dinamis (pemetaan dari internal container agar dapat diakses oleh host/diluar container) melalui file .env (port ex container -> port in container)
     networks:
       - net_attendance_app_user
     depends_on:
@@ -32,7 +32,7 @@ services:
     volumes:
       - vol_attendance_app_user:/data/db  # Volume persisten untuk database
     ports:
-      - "${MONGODB_PORT}:8081"  # Expose port dinamis (pemetaan dari internal container agar dapat diakses oleh host/diluar container) dari .en
+      - "${MONGODB_PORT}:27017"  # Expose port dinamis (pemetaan dari internal container agar dapat diakses oleh host/diluar container) melalui file .env (port ex container -> port in container)
     networks:
       - net_attendance_app_user
     environment:

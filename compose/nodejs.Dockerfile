@@ -21,7 +21,7 @@ RUN npm install -g nodemon
 # Menyalin seluruh kode aplikasi ke dalam container
 COPY . .
 
-# Membuka port default aplikasi (app.js) agar dapat diakses diluar container
+# Dokumentasi bahwa aplikasi berjalan di port 3000 (hanya dapat diakses melalui internal container lainnya)
 EXPOSE 3000
 
 # Menjalankan aplikasi dengan nodemon agar otomatis reload saat ada perubahan
@@ -45,7 +45,7 @@ COPY . .
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
 
-# Membuka port default aplikasi (app.js) agar dapat diakses diluar container
+# Dokumentasi bahwa aplikasi berjalan di port 3000 (hanya dapat diakses melalui internal container lainnya)
 EXPOSE 3000
 
 # Menjalankan aplikasi dengan Node.js langsung (tanpa nodemon)
