@@ -13,8 +13,8 @@ RUN npm install express mongoose --save
 # Menyalin seluruh kode aplikasi ke dalam container
 COPY . .
 
-# Mengekspos port aplikasi (3000) sebagai 8080
-EXPOSE 8000
+# Dokumentasi bahwa aplikasi berjalan di port 3000
+EXPOSE 3000
 
 # Menjalankan perintah untuk memulai aplikasi
 CMD ["node", "app.js"]

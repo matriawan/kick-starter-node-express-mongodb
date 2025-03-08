@@ -1,39 +1,47 @@
+version: "3.8"
+
 services:
   webserver:
     container_name: c_nodejs_attendance_app_user
-    restart: always
+    restart: unless-stopped
     build:
       context: .
       dockerfile: nodejs.Dockerfile
-    image: 'i_node:22.14-alpine3.20'
+      args:
+        NODE_ENV: ${APP_ENV}  # Mode dari .env
+    image: i_node:22.14-alpine3.20
     volumes:
-      - ./src:/var/www/
-      - /var/www/node_modules
+      - ./src:/var/www/  # Sinkronisasi kode applikasi dari host ke dalam container untuk dev
+      - /var/www/node_modules  # Menjaga node_modules tetap ada di dalam container
     ports:
-      - 8080:3000
+      - "${NODEJS_PORT}:3000"    # Expose port dinamis (pemetaan dari internal container agar dapat diakses oleh host/diluar container) dari .env
     networks:
       - net_attendance_app_user
     depends_on:
       - database
+    environment:
+      NODE_ENV: ${APP_ENV}
 
   database:
     container_name: c_mongodb_attendance_app_user
-    image: 'i_mongodb:5.0.10'
-    restart: always
+    image: i_mongodb:5.0.10
+    restart: unless-stopped
     build:
       context: .
       dockerfile: mongodb.Dockerfile
     volumes:
-      - volume_attendance_app_user:/data/db
+      - vol_attendance_app_user:/data/db  # Volume persisten untuk database
     ports:
-      - 8081:27017
+      - "${MONGODB_PORT}:8081"  # Expose port dinamis (pemetaan dari internal container agar dapat diakses oleh host/diluar container) dari .en
     networks:
       - net_attendance_app_user
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Secret!
+      MONGO_INITDB_DATABASE: db_attendance_app_user
 
 volumes:
-  volume_attendance_app_user:
+  vol_attendance_app_user:
 
 networks:
   net_attendance_app_user:
-    
-

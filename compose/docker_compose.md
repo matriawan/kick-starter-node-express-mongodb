@@ -39,7 +39,7 @@ RUN npm install -g nodemon
 # Menyalin seluruh kode aplikasi ke dalam container
 COPY . .
 
-# Membuka port default aplikasi (app.js) agar dapat diakses diluar container
+# Dokumentasi bahwa aplikasi berjalan di port 3000 (hanya dapat diakses melalui internal container lainnya)
 EXPOSE 3000
 
 # Menjalankan aplikasi dengan nodemon agar otomatis reload saat ada perubahan
@@ -63,7 +63,7 @@ COPY . .
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
 
-# Membuka port default aplikasi (app.js) agar dapat diakses diluar container
+# Dokumentasi bahwa aplikasi berjalan di port 3000 (hanya dapat diakses melalui internal container lainnya)
 EXPOSE 3000
 
 # Menjalankan aplikasi dengan Node.js langsung (tanpa nodemon)
@@ -92,7 +92,7 @@ ENV MONGO_INITDB_DATABASE=db_attendance_app_user
 # Membuat direktori untuk menyimpan data MongoDB secara persisten
 VOLUME [ "/data/db" ]
 
-# Mengekspos default port MongoDB (27017) agar dapat diakses dari luar container
+# Dokumentasi bahwa aplikasi berjalan di port 27017 (default hanya dapat diakses melalui internal container lainnya)
 EXPOSE 27017
 
 CMD ["mongod", "--bind_ip", "0.0.0.0"]
@@ -129,7 +129,7 @@ services:
       - ./src:/var/www/  # Sinkronisasi kode applikasi dari host ke dalam container untuk dev
       - /var/www/node_modules  # Menjaga node_modules tetap ada di dalam container
     ports:
-      - "${APP_PORT}:3000"    # Expose port dinamis (pemetaan dari internal container agar dapat diakses oleh host/diluar container) dari .env
+      - "${NODEJS_PORT}:3000"  # Expose port dinamis (pemetaan dari internal container agar dapat diakses oleh host/diluar container) melalui file .env (port ex container -> port in container)
     networks:
       - net_attendance_app_user
     depends_on:
@@ -145,24 +145,24 @@ services:
       context: .
       dockerfile: mongodb.Dockerfile
     volumes:
-      - volume_attendance_app_user:/data/db  # Volume persisten untuk database
+      - vol_attendance_app_user:/data/db  # Volume persisten untuk database
     ports:
-      - "${MONGO_PORT}:8081"  # Expose port dinamis (pemetaan dari internal container agar dapat diakses oleh host/diluar container) dari .en
+      - "${MONGODB_PORT}:27017"  # Expose port dinamis (pemetaan dari internal container agar dapat diakses oleh host/diluar container) melalui file .env (port ex container -> port in container)
     networks:
       - net_attendance_app_user
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: Secret!
-      MONGO_INITDB_DATABASE: UsersDB
+      MONGO_INITDB_DATABASE: db_attendance_app_user
 
 volumes:
-  volume_attendance_app_user:
+  vol_attendance_app_user:
 
 networks:
   net_attendance_app_user:
 ```
 
-✅ **Gunakan persistence volume untuk MongoDB** (`volume_attendance_app_user:/data/db`) agar data tetap ada meskipun container dihentikan atau bahkan dihapus.  
+✅ **Gunakan persistence volume untuk MongoDB** (`vol_attendance_app_user:/data/db`) agar data tetap ada meskipun container dihentikan atau bahkan dihapus.  
 ✅ **Gunakan `.env` untuk mengatur environment mode & port** secara fleksibel.  
 ✅ Saat menggunakan `restart: always`, yang berarti *container* akan terus *restart* bahkan jika dihentikan manual. Oleh karena itu, sebagai solusinya dapat menggunakan `unless-stopped`, agar lebih fleksibel.
 
@@ -178,13 +178,14 @@ networks:
 APP_ENV=development
 
 # Port aplikasi Node.js
-APP_PORT=8080
+NODEJS_PORT=8080
 
 # Port MongoDB
-MONGO_PORT=8081
+MONGODB_PORT=8081
 ```
 
 ✅ **Mode dapat diubah dengan mengedit `.env`** tanpa menyentuh file konfigurasi utama.  
+✅ Memetakan port **Node.js** `(mongodb.Dockerfile)` maupun port **MongoDB** pada `(mongodb.Dockerfile)`, agar dapat diakses diluar kontainer melalui nomor port lainnya.
 
 ---
 
@@ -210,6 +211,17 @@ APP_ENV=production docker-compose --env-file .env up -d --build
 ### **📌 Menghentikan Semua Container**
 ```sh
 docker-compose down
+```
+
+### **📌 Menghentikan dan Menghapus Semua Service Container**
+```sh
+docker-compose rm -fsv  
+```
+### **📌 Keterangan Opsi**
+```
+--force , -f      Don't ask to confirm removal
+--stop , -s       Stop the containers, if required, before removing
+--volumes , -v    Remove any anonymous volumes attached to containers
 ```
 
 📌 **Menghentikan semua layanan, tetapi data MongoDB tetap ada karena menggunakan volume.**  

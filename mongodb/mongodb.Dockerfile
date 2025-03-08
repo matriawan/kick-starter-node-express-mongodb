@@ -6,8 +6,8 @@ ENV MONGO_INITDB_ROOT_USERNAME=root
 ENV MONGO_INITDB_ROOT_PASSWORD=Secret!
 ENV MONGO_INITDB_DATABASE=UsersDB
 
-# Mengekspos port MongoDB (27017) sebagai 8081
-EXPOSE 8081
+# Dokumentasi bahwa aplikasi berjalan di port 27017
+EXPOSE 27017
 
 # Perintah untuk menjalankan MongoDB saat container dimulai
 CMD ["mongod", "--bind_ip", "0.0.0.0"]
